@@ -1,16 +1,14 @@
 import os
 import shutil
 
+dek_path = os.path.expanduser("~\\Desktop")
 
-def find_viva():
+def find_viva(d_path):
 
-    dek_path = os.path.expanduser("~\\Desktop")
-    print(dek_path)
-
-    if "Vivo" in os.listdir(dek_path):
-        return dek_path + "/Vivo"
+    if "Vivo" in os.listdir(d_path):
+        return d_path + "/Vivo"
     else:
-        shutil.copytree("./Vivo", f"{dek_path}/Vivo")
+        shutil.copytree("./Vivo", f"{d_path}/Vivo")
         find_viva()
 
 
@@ -39,17 +37,21 @@ def c_2369(path):
 def backup_check(path):
 
     if "backup" in os.listdir(path):
-        load_backup(THE_PATH)
+        load_backup(path)
 
     else:
         os.mkdir(f"{path}/backup")
-        c_2369(THE_PATH)
+        c_2369(path)
 
-THE_PATH = find_viva()
+
+
 while True:
-
     try:
-        backup_check(THE_PATH)
 
+        try:
+            backup_check(find_viva(dek_path))
+
+        except:
+            backup_check(find_viva(dek_path))
     except:
-        backup_check(THE_PATH)
+        backup_check(find_viva(dek_path))

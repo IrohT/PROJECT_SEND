@@ -1,7 +1,7 @@
 #felcseréli a fájlok nevét és típusait
 import os
 import shutil
-from cryptography.fernet import Fernet
+#from cryptography.fernet import Fernet
 
 
 
@@ -14,7 +14,7 @@ class Avanger:
 
     def __init__(self, fullname, path):
         self.fullname = fullname
-        self.key = Fernet(Fernet.generate_key())
+        #self.key = Fernet(Fernet.generate_key())
         self.name = fullname.split(".")[0]
         self.ext = fullname.split(".")[-1]
         self.path = path
